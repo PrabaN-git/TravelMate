@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
+import { BASE_URL } from "../config";
 
 const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -18,9 +19,8 @@ const LoginPage = () => {
     e.preventDefault();
 
     const url = isSignup
-      ? "http://localhost:5000/api/auth/signup"
-      : "http://localhost:5000/api/auth/login";
-
+  ? `${BASE_URL}/api/auth/signup`
+  : `${BASE_URL}/api/auth/login`;
     const payload = isSignup
       ? { username: formData.username, email: formData.email, password: formData.password, role }
       : { username: formData.username, password: formData.password };

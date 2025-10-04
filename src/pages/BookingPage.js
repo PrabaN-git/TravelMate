@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./BookingPage.css";
+import { BASE_URL } from "../config";
 
 const BookingPage = () => {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const BookingPage = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/bookings", {
+await axios.post(`${BASE_URL}/api/bookings`, {
         userId: loggedInUser?._id,
         fullName: formData.fullName,
         email: formData.email,
@@ -121,9 +122,10 @@ const BookingPage = () => {
       });
       setStep(1);
     } catch (err) {
-      console.error(err);
-      alert("Error booking trip");
-    }
+  console.error("Booking error:", err.response || err);
+  alert("Error booking trip: " + (err.response?.data?.message || err.message));
+}
+
   };
 
   return (
