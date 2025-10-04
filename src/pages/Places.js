@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./Places.css";
 
 function Places() {
   const [places, setPlaces] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/places")
       .then(res => setPlaces(res.data))
       .catch(err => console.log(err));
   }, []);
+
+  const handleBooking = (placeName) => {
+    navigate(`/booking/${placeName}`); // go to BookingPage
+  };
 
   return (
     <div className="places-section" id="places">
@@ -20,7 +26,13 @@ function Places() {
             <img src={p.img} alt={p.name} className="place-img" />
             <h3>{p.name}</h3>
             <p>{p.desc}</p>
-            <div className="place-info">{p.price}</div>
+            <div className="place-info">Price: {p.price}</div>
+            <button 
+              className="book-btn" 
+              onClick={() => handleBooking(p.name)}
+            >
+              Book Now
+            </button>
           </div>
         ))}
       </div>

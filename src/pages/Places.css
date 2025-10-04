@@ -42,3 +42,17 @@
   margin-bottom: 30px;
   color: #333;
 }
+.book-btn {
+  margin-top: 10px;
+  background: #2575fc;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.book-btn:hover {
+  background: #1a5fd3;
+}
